@@ -1,0 +1,10 @@
+<div class="mb-4">
+  <p-menubar [model]="items">
+    <ng-template pTemplate="end">
+      <div class="d-flex">
+        <div class="me-4" *ngIf="userService.isAuth">{{ userService.user?.login || '' }}</div>
+        <div>{{ timerObservable$ | async | date:'medium' }}</div>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>

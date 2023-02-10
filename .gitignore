@@ -1,0 +1,7 @@
+/dist
+/node_modules
+.angular/
+.idea/
+/.angular/cache
+.sass-cache/
+/connect.lock

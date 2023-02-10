@@ -1,0 +1,34 @@
+<div class="ms-1">
+  <div class="w-100">
+    <label class="d-flex align-items-center">
+      <p class="mx-1 my-0">Меню:</p>
+      <p-dropdown [options]="menuTypes"
+                  [(ngModel)]="selectedMenuType"
+                  optionLabel="label"
+                  styleClass="w-100"
+                  class="d-flex flex-grow-1"
+                  (onChange)="selectDropdown($event)">
+        <div class="w-100"></div>
+      </p-dropdown>
+    </label>
+
+  </div>
+  <div class="mt-4">
+      <input id="float-input"
+             placeholder="Поиск"
+             type="text"
+             pInputText
+             [(ngModel)]="filterValue"
+             (ngModelChange)="valueChange(filterValue)">
+  </div>
+  <div class="mt-4">
+    <button pButton pRipple type="button" label="Найти" class="p-button-info w-100" (click)="initTours()"></button>
+  </div>
+  <div class="mt-4">
+    <button pButton pRipple type="button" label="Показать ошибку" class="p-button-warning w-100" (click)="initRestError()"></button>
+  </div>
+  <div class="mt-4">
+    <button pButton pRipple type="button" label="Удалить все туры" class="p-button-info w-100"
+            (click)="removeTours()"></button>
+  </div>
+</div>

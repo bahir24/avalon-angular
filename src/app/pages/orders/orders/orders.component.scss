@@ -1,0 +1,15 @@
+:host {
+  height: 100%;
+}
+
+.card-img-top {
+  height: 230px;
+  object-fit: cover;
+}
+
+.list-container {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: .2rem;
+}
