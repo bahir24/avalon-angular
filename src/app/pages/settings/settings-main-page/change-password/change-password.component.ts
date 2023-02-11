@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { AuthService } from "../../../../services/auth/auth.service";
-import { MessageService } from "primeng/api";
-import { UserService } from "../../../../services/user/user.service";
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {AuthService} from "../../../../services/auth/auth.service";
+import {MessageService} from "primeng/api";
+import {UserService} from "../../../../services/user/user.service";
 
 @Component({
   selector: 'app-change-password',
@@ -12,9 +12,12 @@ import { UserService } from "../../../../services/user/user.service";
 export class ChangePasswordComponent implements OnInit {
   changePasswordForm!: FormGroup;
   public minLength = 6;
-  constructor(private authService: AuthService,
-              private messageService: MessageService,
-              private userService: UserService) {
+
+  constructor(
+    private authService: AuthService,
+    private messageService: MessageService,
+    private userService: UserService
+  ) {
   }
 
   ngOnInit(): void {
@@ -36,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
       }
       return !!control.parent &&
       !!control.parent.value &&
-      control.value === (control.parent?.controls as any)[matchTo].value ? null : { matching: true };
+      control.value === (control.parent?.controls as any)[matchTo].value ? null : {matching: true};
     };
   }
 

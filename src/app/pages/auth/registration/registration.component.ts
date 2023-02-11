@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit, SimpleChanges} from '@angular/core';
+import {FormControl, FormControlStatus, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth/auth.service";
 import {IUser} from "../../../models/users";
 import {MessageService} from "primeng/api";
@@ -7,6 +7,7 @@ import {LocalStorageService} from "../../../services/local-storage/local-storage
 import {ConfigService} from "../../../services/config/config.service";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Message} from "primeng/api/message";
+
 
 @Component({
   selector: 'app-registration',
@@ -16,6 +17,7 @@ import {Message} from "primeng/api/message";
 export class RegistrationComponent implements OnInit {
   public minLength = 6;
   public registrationForm: FormGroup;
+
   public isVariousPasswords = false;
   public useUserCard = false;
   private usersUrl = "http://localhost:3000/users";
@@ -25,10 +27,20 @@ export class RegistrationComponent implements OnInit {
     summary: 'Регистрация прошла успешно'
   };
 
+  public validation = {
+    login:true,
+    password:true,
+    email: {},
+    cardNumber:true,
+  };
+
+
+
   constructor(
     private authService: AuthService,
     private messageService: MessageService,
     private localStorageService: LocalStorageService,
+
     private http: HttpClient
   ) {
     this.registrationForm = new FormGroup({
@@ -37,9 +49,59 @@ export class RegistrationComponent implements OnInit {
       "email": new FormControl('', [Validators.required, Validators.email]),
       "cardNumber": new FormControl('',),
     });
+
+    // Object.keys(this.registrationForm.controls).forEach((key: string)  =>
+      // this.registrationForm.get(key)?.statusChanges.forEach(item => this.validation.key = item === 'VALID' ?  true : false));
+
+    // Array.from(this.registrationForm.controls).forEach()
+
+    // for (let i=1;i<)
+
+    // console.log(this.registrationForm.controls);
+
+    this.registrationForm.get('login')?.statusChanges.forEach(item => this.validation.login = item === 'VALID' ?  true : false);
+    this.registrationForm.get('password')?.statusChanges.forEach(item => this.validation.password = item === 'VALID' ?  true : false);
+    this.registrationForm.get('email')?.statusChanges.forEach(item => this.validation.email = item === 'VALID' ?  true : false);
+    this.registrationForm.get('cardNumber')?.statusChanges.forEach(item => this.validation.cardNumber = item === 'VALID' ?  true : false);
   }
   ngOnInit() {
     this.useUserCard = ConfigService.config.useUserCard;
+  }
+  ngOnChanges(changes: SimpleChanges) {
+
+    console.log(changes)
+    // for (const propName in changes) {
+
+      // const chng = changes[propName];
+      // const cur  = JSON.stringify(chng.currentValue);
+      // const prev = JSON.stringify(chng.previousValue);
+      // this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+    // }
+  }
+
+  // ngAfterViewInit(): void{
+  //   this.registrationForm.controls['cardNumber'].setValue(this.makeUser()?.cardNumber);
+  // }
+
+  // checkValidation(){
+  //   if(this.registrationForm.invalid){
+  //     // let form = this.registrationForm;
+  //     // console.log(form.);
+  //     // console.log()
+  //   }
+  // }
+
+  // inputCheckValidation(){
+  //   // if(this.){
+  //     // let form = this.registrationForm;
+  //     // console.log(form.);
+  //     // console.log()
+  //   // }
+  // }
+
+  checkfunc(item: string) {
+    console.log(item);
+    return 'class';
   }
 
   registrationSubmit() {
@@ -60,8 +122,6 @@ export class RegistrationComponent implements OnInit {
       cardNumber: this.registrationForm.controls['cardNumber'].value,
     }
   }
-
-
 }
 
 

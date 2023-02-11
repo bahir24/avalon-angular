@@ -21,7 +21,7 @@ export class UserService {
   setUser(user: IUser | null) {
     this.user = user;
     this.isAuth = true;
-    console.log('set user', this.user);
+    // console.log('set user', this.user);
   }
 
   getUser(): IUser | null {

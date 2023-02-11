@@ -1,28 +1,18 @@
 <form [formGroup]="registrationForm" (submit)="registrationSubmit()">
   <div>
-    <input type="text" pInputText formControlName="login" ngModel="login" name="login" placeholder="login"/>
-    <div *ngIf="registrationForm.controls['login'].invalid && registrationForm.controls['login'].dirty">
-      <span class="bg-danger">Логин не должен быть пустой.</span>
-    </div>
+    <input type="text" pInputText formControlName="login" (invalid)="( validation.login = !validation.login )" #login ngModel="login" name="login" placeholder="login"/>
+    <div  class="text-danger" [ngClass]="{'invalid-feedback': validation.login }">Логин не должен быть пустой.</div>
   </div>
   <div class="mt-4">
     <input type="text" pInputText formControlName="password" [ngModel]="123456" name="password" placeholder="password"/>
-    <div *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].dirty">
-      <span class="bg-danger">Пароль не должен быть короче {{this.minLength}}.</span>
-    </div>
+    <div  class="text-danger" [ngClass]="{'invalid-feedback': validation.password }">Логин не должен быть пустой.</div>
   </div>
   <div class="mt-4">
     <input type="text" pInputText formControlName="confirmPassword" [ngModel]="123456" name="confirm" placeholder="confirm password"/>
-    <div *ngIf="isVariousPasswords">
-      <span class="bg-danger">Пароли должны совпадать.</span>
-    </div>
   </div>
   <div class="mt-4">
     <input type="text" pInputText formControlName="email" ngModel="admin@mail.com" name="email" placeholder="email"/>
-    <div *ngIf="registrationForm.controls['email'].invalid && registrationForm.controls['email'].dirty">
-      <span class="bg-danger">Почта не должна быть пустой.</span>
-    </div>
-
+    <div  class="text-danger" [ngClass]="{'invalid-feedback': validation.email }">Почта не должна быть пустой.</div>
   </div>
   <ng-container *ngIf="useUserCard; else noCard" class="mt-4">
     <div>
@@ -35,8 +25,8 @@
   </ng-template>
   <div class="mt-4">
     <p-checkbox
-      label="Сохранить пользователя в локальном хранилище"
-      formControlName="isLocalStorage"
+      label="Добавить карту"
+      formControlName="cardIsAccepted"
       [binary]="true">
     </p-checkbox>
   </div>

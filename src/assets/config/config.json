@@ -1,5 +1,6 @@
 {
   "serverProtocol": "http",
   "baseIndexHref": "/",
-  "useUserCard": false
+  "useUserCard": false,
+  "backend": "http://localhost:3000"
 }

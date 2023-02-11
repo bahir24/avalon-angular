@@ -19,7 +19,11 @@ export class BlocksStyleDirective implements AfterViewInit {
   public items!: HTMLElement[];
   public index = 0;
 
-  constructor(private el: ElementRef, private router: Router, private ticketsStorageService: TicketsStorageService) {
+  constructor(
+    private el: ElementRef,
+    private router: Router,
+    private ticketsStorageService: TicketsStorageService
+  ) {
   }
 
   ngAfterViewInit() {
