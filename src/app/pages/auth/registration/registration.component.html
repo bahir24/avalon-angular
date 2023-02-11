@@ -1,24 +1,24 @@
-<form [formGroup]="registrationForm" (submit)="registrationSubmit(registrationForm.value)">
+<form [formGroup]="registrationForm" (submit)="registrationSubmit()">
   <div>
-    <input type="text" pInputText formControlName="login" name="login" placeholder="login"/>
+    <input type="text" pInputText formControlName="login" ngModel="login" name="login" placeholder="login"/>
     <div *ngIf="registrationForm.controls['login'].invalid && registrationForm.controls['login'].dirty">
       <span class="bg-danger">Логин не должен быть пустой.</span>
     </div>
   </div>
   <div class="mt-4">
-    <input type="text" pInputText formControlName="password" name="password" placeholder="password"/>
+    <input type="text" pInputText formControlName="password" [ngModel]="123456" name="password" placeholder="password"/>
     <div *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].dirty">
       <span class="bg-danger">Пароль не должен быть короче {{this.minLength}}.</span>
     </div>
   </div>
   <div class="mt-4">
-    <input type="text" pInputText formControlName="confirmPassword" name="confirm" placeholder="confirm password"/>
+    <input type="text" pInputText formControlName="confirmPassword" [ngModel]="123456" name="confirm" placeholder="confirm password"/>
     <div *ngIf="isVariousPasswords">
       <span class="bg-danger">Пароли должны совпадать.</span>
     </div>
   </div>
   <div class="mt-4">
-    <input type="text" pInputText formControlName="email" name="email" placeholder="email"/>
+    <input type="text" pInputText formControlName="email" ngModel="admin@mail.com" name="email" placeholder="email"/>
     <div *ngIf="registrationForm.controls['email'].invalid && registrationForm.controls['email'].dirty">
       <span class="bg-danger">Почта не должна быть пустой.</span>
     </div>
